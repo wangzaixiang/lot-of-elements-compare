@@ -3,7 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 
 var count = 0;
 
-/*
+
 @customElement("perf-comp-00")
 class PerfComponent00 extends LitElement {
     @property({type: String}) content = "0";
@@ -28,27 +28,7 @@ class PerfComponent00 extends LitElement {
         // return html`${this.content}`
     }
 }
-*/
 
-class PerfComponent00 extends HTMLElement {
-    constructor() {
-        super();
-        count += 1;
-    }
-
-    connectedCallback() {
-        this.render();
-    }
-
-    render() {
-        let text = document.createTextNode(this.getAttribute("content"));
-        this.appendChild(text);
-    }
-}
-// register the custom element
-customElements.define("perf-comp-00", PerfComponent00);
-
-/*
 @customElement("perf-comp-01")
 class PerfComponent01 extends LitElement {
     @property({type: String}) content = "1";
@@ -67,32 +47,10 @@ class PerfComponent01 extends LitElement {
             `;
     }
 }
-*/
 
-class PerfComponent01 extends HTMLElement {
-    constructor() {
-        super();
-    }
-
-    connectedCallback() {
-        this.render();
-    }
-
-    render() {
-        let comp1 = document.createElement("perf-comp-00");
-        comp1.setAttribute("content", this.getAttribute("content"));
-        this.appendChild(comp1);
-
-        for (let i = 0; i < 4; i++) {
-            let comp = document.createElement("perf-comp-00");
-            comp.setAttribute("content", '');
-            this.appendChild(comp);
-        }
-    }
-}
-customElements.define("perf-comp-01", PerfComponent01);
 
 // 100 * 2 * 5 = 1000
+
 @customElement("perf-comp-10")
 class PerfComponent10 extends LitElement {
 
@@ -110,6 +68,7 @@ class PerfComponent10 extends LitElement {
     }
 
 }
+
 @customElement("perf-comp-11")
 class PerfComponent11 extends LitElement {
     @property({type: String}) content = "1";
