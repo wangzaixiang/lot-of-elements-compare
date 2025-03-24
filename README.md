@@ -42,4 +42,5 @@ Lit 2: PerfComp00(simple text node) + PerfComp01 using no shadow dom
 3. 本次测试较为变态，在一般应用场景中如不涉及到如此巨大的组件树（建议一般控制在2000以下时），一般无需担心初始化的性能问题。
 
 ## 参考：
-[Git Repo](https://github.com/wangzaixiang/lot-of-elements-compare)
+1. [Git Repo](https://github.com/wangzaixiang/lot-of-elements-compare)
+2. [Blog](https://wangzaixiang.github.io/blog/lot-of-components-perf/)
