@@ -7,20 +7,24 @@ var count = 0;
 class PerfComponent00 extends LitElement {
     @property({type: String}) content = "0";
 
-    static styles = css`
-        div {
-            display: inline;
-        }
-        `;
+    // static styles = css`
+    //     div {
+    //         display: inline;
+    //     }
+    //     `;
 
     constructor() {
         super();
         count += 1;
     }
 
+    protected createRenderRoot(): HTMLElement | DocumentFragment {
+        return this;
+    }
+
     render() {
         return html`
-            <div>${this.content}</div>
+            <div style="display: inline">${this.content}</div>
         `
     }
 }
