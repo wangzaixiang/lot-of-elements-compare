@@ -1,10 +1,14 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import {c} from "vite/dist/node/moduleRunnerTransport.d-CXw_Ws6P";
 
 var count = 0;
 
 class PerfComponent00 extends HTMLElement {
+
+    // static style = css`
+    //     div { display: inline }
+    // `
+
     constructor() {
         super();
         count += 1;
@@ -15,9 +19,12 @@ class PerfComponent00 extends HTMLElement {
     }
 
     render() {
-        let shadow = this.attachShadow({mode: "open"});
+        // let shadow = this.attachShadow({mode: "open"});
+        // shadow.adoptedStyleSheets = [ PerfComponent00.style.styleSheet ]
+        let div = document.createElement("div");
         let text = document.createTextNode(this.getAttribute("content"));
-        shadow.appendChild(text);
+        div.appendChild(text);
+        this.appendChild(div);
     }
 }
 // register the custom element
@@ -27,6 +34,9 @@ class PerfComponent01 extends HTMLElement {
     constructor() {
         super();
     }
+    static style = css`
+         div { display: inline }
+     `
 
     connectedCallback() {
         this.render();
@@ -34,6 +44,8 @@ class PerfComponent01 extends HTMLElement {
 
     render() {
         let shadow = this.attachShadow({mode: "open"});
+        shadow.adoptedStyleSheets = [ PerfComponent01.style.styleSheet ]
+
         let comp1 = document.createElement("perf-comp-00");
         comp1.setAttribute("content", this.getAttribute("content"));
         shadow.appendChild(comp1);
@@ -119,29 +131,20 @@ class PerfComponent20 extends HTMLElement {
 }
 customElements.define("perf-comp-20", PerfComponent20);
 
-class PerfTestContainer extends HTMLElement {
-    constructor() {
-        super();
-    }
-
-    connectedCallback() {
-        this.render();
-    }
+@customElement('perf-test-container')
+class PerfTestContainer extends LitElement {
 
     handleClick() {
         console.info("counter = ", count);
     }
 
     render() {
-        let shadow = this.attachShadow({mode: "open"});
-        let comp = document.createElement("perf-comp-20");
-        comp.setAttribute("content", "abcdefghijklmnopqrstuvwxyz");
-        shadow.appendChild(comp);
-
-        let button = document.createElement("button");
-        button.textContent = "click";
-        button.addEventListener("click", this.handleClick);
-        shadow.appendChild(button);
+        return html`
+            <h1>Native Element: element DOM + div.text shared style </h1>
+            <div>
+                <perf-comp-20 content="abcdefghijklmnopqrstuvwxyz"></perf-comp-20>
+            </div>
+            <button @click=${this.handleClick}>click</button>
+        `;
     }
 }
-customElements.define("perf-test-container", PerfTestContainer);

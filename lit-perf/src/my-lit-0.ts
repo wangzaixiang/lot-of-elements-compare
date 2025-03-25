@@ -3,39 +3,29 @@ import { customElement, property } from 'lit/decorators.js';
 
 var count = 0;
 
-
 @customElement("perf-comp-00")
 class PerfComponent00 extends LitElement {
     @property({type: String}) content = "0";
 
-    // static styles = css`
-    //      div {
-    //          display: inline;
-    //      }
-    //      `;
+    static styles = css`
+         div {
+             display: inline;
+         }
+         `;
 
     constructor() {
         super();
         count += 1;
     }
 
-    protected createRenderRoot(): HTMLElement | DocumentFragment {
-        return this;
-    }
-
     render() {
-        return html` <div style="display: inline">${this.content}</div>`
-        // return html`${this.content}`
+        return html` <div>${this.content}</div>`
     }
 }
 
 @customElement("perf-comp-01")
 class PerfComponent01 extends LitElement {
     @property({type: String}) content = "1";
-
-    createRenderRoot(): HTMLElement {
-        return this;
-    }
 
     render(){
         return html`
@@ -105,6 +95,7 @@ class PerfTestContainer extends LitElement {
 
     render() {
         return html`
+            <h1>Lit Element + Shadow DOM + shared style + div.text </h1>
             <div>
                 <perf-comp-20 content="abcdefghijklmnopqrstuvwxyz"></perf-comp-20>
             </div>
